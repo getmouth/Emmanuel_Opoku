@@ -1,0 +1,39 @@
+body {
+  background: white;
+  box-sizing: border-box;
+}
+
+
+.repo {
+  display: flex;
+  justify-content: auto;
+  box-shadow: 4px 4px 5px rgba(54, 54, 54, 0.171);
+  border-radius: 9px;
+  margin-top: 32px;
+  height: 90px;
+
+  .repo-img {
+    width: 90px;
+    img {
+      width: 90px; 
+      border-radius: 8px 0 0 8px;
+    }
+  }
+
+  .repo-info {
+    width: 70%;
+    position: relative;
+    left: 15px;
+    top: 10px;
+    
+    p {
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+
+    span {
+      font-size: 11px;
+    }
+  }
+  
+}
