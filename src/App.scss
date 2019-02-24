@@ -25,6 +25,11 @@ body {
     position: relative;
     left: 15px;
     top: 10px;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
     
     p {
       font-weight: bold;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Repo from './Repo';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import '../../public/App.css';
+import RepoList from './RepoList';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
@@ -8,8 +9,10 @@ class App extends Component {
     super(props);
     this.state = {
       repos: [],
+      currentRepo: null,
     };
   }
+  // TODO: manage state with redux
 
   componentDidMount() {
     // GET : all repos request
@@ -18,17 +21,20 @@ class App extends Component {
       .then(resp => resp.json()).then(repos => this.setState({ repos }));
   }
 
+  fetchRepo = (name) => (
+    fetch(`https://api.github.com/repos/quandoo/${name}`)
+      .then(resp => resp.json()).then(repo => this.setState({ currentRepo: repo }))
+  );
+
   render() {
-    console.log(this.state.repos);
     const { repos } = this.state;
     return (
       <div className="App container">
-        <h1>Quandoo Repos</h1>
-        <div className="repo-row row">
-          {repos.map(repo => (
-            <Repo repo={repo} key={repo.id} />
-          ))}
-        </div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" render={() => <RepoList repos={repos} fetchRepo={this.fetchRepo} />} />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
