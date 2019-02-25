@@ -26,6 +26,11 @@ body {
     left: 15px;
     top: 10px;
 
+    .star {
+      position: relative;
+      bottom: 2px;
+    }
+
     a {
       text-decoration: none;
       color: inherit;

@@ -30,6 +30,10 @@ module.exports = {
         test: /\.(jpg|png|jpeg|gif)$/,
         loader: 'file-loader',
       },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader',
+      },
     ],
   },
 };

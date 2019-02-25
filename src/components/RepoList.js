@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Repo from './Repo';
 
-const RepoList = ({ repos, fetchRepo }) => (
+const RepoList = ({ repos, fetchRepo, fetchContent }) => (
   <div>
     <h1>Quandoo Repos</h1>
     <div className="repo-row row">
       {repos.map(repo => (
-        <Repo repo={repo} key={repo.id} fetchRepo={fetchRepo} />
+        <Repo repo={repo} key={repo.id} fetchRepo={fetchRepo} fetchContent={fetchContent} />
       ))}
     </div>
   </div>
@@ -16,6 +16,7 @@ const RepoList = ({ repos, fetchRepo }) => (
 RepoList.propTypes = {
   repos: PropTypes.array.isRequired,
   fetchRepo: PropTypes.func.isRequired,
+  fetchContent: PropTypes.func.isRequired,
 };
 
 export default RepoList;
