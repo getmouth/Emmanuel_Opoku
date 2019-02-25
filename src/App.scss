@@ -47,3 +47,24 @@ body {
   }
   
 }
+
+
+// Header component
+
+.header {
+  width: 100%;
+
+  .svg-container {
+    margin-top: 30px;
+    margin-left: 60px;
+    width: 165px;
+    height: 37px;
+  }
+
+  .header-nav {
+    background-color: #fff !important;
+    box-shadow: 2px 2px 5px rgba(54, 54, 54, 0.171);
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+}

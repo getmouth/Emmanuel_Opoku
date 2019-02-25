@@ -3,6 +3,7 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import '../../public/App.css';
 import RepoList from './RepoList';
 import RepoDetails from './RepoDetails';
+import Header from './Header';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
@@ -36,25 +37,28 @@ class App extends Component {
   render() {
     const { repos, currentRepo, content } = this.state;
     return (
-      <div className="App container">
+      <div className="App container-fluid">
+        <Header />
         <BrowserRouter>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <RepoList
-                  repos={repos}
-                  fetchRepo={this.fetchRepo}
-                  fetchContent={this.fetchContent}
-                />
-              )}
-            />
-            <Route
-              path="/:name"
-              render={() => <RepoDetails newRepo={currentRepo} contents={content} />}
-            />
-          </Switch>
+          <main className="container">
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <RepoList
+                    repos={repos}
+                    fetchRepo={this.fetchRepo}
+                    fetchContent={this.fetchContent}
+                  />
+                )}
+              />
+              <Route
+                path="/:name"
+                render={() => <RepoDetails newRepo={currentRepo} contents={content} />}
+              />
+            </Switch>
+          </main>
         </BrowserRouter>
       </div>
     );

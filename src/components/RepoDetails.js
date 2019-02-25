@@ -1,14 +1,50 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class RepoDetails extends Component {
+  displayContent = () => (
+    this.props.contents.map(content => (
+      <tr key={content.sha}>
+        <td><a href={content.html_url}>{content.name}</a></td>
+      </tr>
+    ))
+  );
+
   render() {
-    const { newRepo, contents } = this.props;
+    const { newRepo } = this.props;
     if (!newRepo) {
       return <p>wating</p>;
       // TODO : Replace with a loading gif.
     }
+
+    const renderParrent = () => {
+      if (newRepo.parent) {
+        return (
+          <th>
+            <td>
+              <img
+                src={newRepo.parent.owner.avatar_url}
+                alt={newRepo.parent.full_name}
+              />
+            </td>
+            <td>
+              <a href={newRepo.parent.owner.html_url}>
+                {newRepo.parent.full_name}
+              </a>
+            </td>
+          </th>
+        );
+      }
+      return (
+        <a href={newRepo.owner.html_url}>
+          <img src={newRepo.owner.avatar_url} alt={newRepo.owner.full_name} />
+          {newRepo.owner.full_name}
+        </a>
+      );
+    };
+
 
     return (
       <div>
@@ -40,22 +76,18 @@ class RepoDetails extends Component {
             Issues: {newRepo.open_issues_count}
           </div>
           <div className="col-md-3">
-            <a href={newRepo.parent ? newRepo.parent.owner.html_url : ''}>
-              {newRepo.parent ? newRepo.parent.full_name : ''}
-            </a>
-          </div>
-          <div className="col-md-3">
             {newRepo.subscribers_count}
           </div>
         </div> {/* row end */}
         <p>{newRepo.description}</p>
         <table className="table table-bordered"> {/* loop through content object */}
+          <thead className="thead-light">
+            <tr>
+              {renderParrent()}
+            </tr>
+          </thead>
           <tbody>
-            {contents.map(content => (
-              <tr>
-                <td><a href={content.html_url}>{content.name}</a></td>
-              </tr>
-            ))}
+            {this.displayContent()}
           </tbody>
         </table>
       </div>
@@ -64,8 +96,8 @@ class RepoDetails extends Component {
 }
 
 RepoDetails.propTypes = {
-  newRepo: PropTypes.object.isRequired,
-  contents: PropTypes.object.isRequired,
+  newRepo: PropTypes.object,
+  contents: PropTypes.array.isRequired,
 };
 
 export default RepoDetails;

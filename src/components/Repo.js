@@ -16,7 +16,7 @@ const Repo = (props) => (
           <Link to={`${props.repo.name}`} onClick={() => props.fetchContent(props.repo.name)}>
             <p onClick={() => props.fetchRepo(props.repo.name)}>{props.repo.name}</p>
           </Link>
-          <span className="star"><img src={star} alt="" style={{width: '12px'}} /></span>
+          <span className="star"><img src={star} alt="" style={{ width: '12px' }} /></span>
           <span className="star_count"> {props.repo.stargazers_count}</span>&emsp;
           <span className="language">{props.repo.language}</span><br />
           <span className="date">
