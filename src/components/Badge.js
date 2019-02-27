@@ -12,7 +12,7 @@ const Badge = (props) => (
 Badge.propTypes = {
   text: PropTypes.string,
   children: PropTypes.number,
-  img: PropTypes.shape(),
+  img: PropTypes.string,
 };
 
 export default Badge;

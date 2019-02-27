@@ -3,9 +3,11 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import RepoBadges from './RepoBadges';
 import file from '../../img/file.png';
 import folder from '../../img/folder.png';
+import loader from './svg/loader';
 
 class RepoDetails extends Component {
   state = {
@@ -34,7 +36,7 @@ class RepoDetails extends Component {
   render() {
     const { repo, contributors, contents } = this.state;
     if (!repo) {
-      return <p>wating</p>;
+      return <div className="repo-loading-svg">{loader()}</div>;
       // TODO : Replace with a loading gif.
     }
 
@@ -57,10 +59,14 @@ class RepoDetails extends Component {
       }
       return (
         <th>
-          <a href={repo.owner.html_url}>
-            <img src={repo.owner.avatar_url} alt={repo.owner.full_name} />
-            {repo.owner.full_name}
-          </a>
+          <img
+            src={repo.owner.avatar_url}
+            alt={repo.owner.full_name}
+            className="parent-img"
+          />
+          <Link to="/">
+            {repo.owner.login}
+          </Link>
         </th>
       );
     };

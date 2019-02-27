@@ -46,7 +46,7 @@ const RepoBadges = (props) => (
 
 RepoBadges.propTypes = {
   repo: PropTypes.object,
-  contributors: PropTypes.object,
+  contributors: PropTypes.array,
 };
 
 export default RepoBadges;
