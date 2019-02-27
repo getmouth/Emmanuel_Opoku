@@ -3,7 +3,7 @@ body {
   box-sizing: border-box;
 }
 
-
+//************** Repo component **************
 .repo {
   display: flex;
   justify-content: auto;
@@ -48,8 +48,25 @@ body {
   
 }
 
+//************** RepoList component **************
 
-// Header component
+.repo-list {
+  margin-top: 30px;
+
+  .repo-owner-login {
+    h1 {
+      text-transform: capitalize;
+      display: inline-block;
+      margin-left: 10px;
+    }
+    img {
+      width: 120px;
+    }
+  }
+}
+
+
+//************** Header component **************
 
 .header {
   width: 100%;
@@ -68,3 +85,83 @@ body {
     margin-left: -15px;
   }
 }
+
+//************** Hero component **************
+
+.hero {
+  .hero-img {
+    margin-right: -15px;
+    margin-left: -15px;
+    height: auto;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+//************** RepoDetails component **************
+.repo-details {
+  margin-top: 30px;
+  .parent-img {
+    width: 50px;
+    margin-right: 10px;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 14px;
+  }
+
+  .content-image {
+    margin-right: 15px;
+    img {
+      width: 15px;
+    }
+  }
+
+  .fork-info {
+    font-size: 9px;
+  }
+
+  .details-badges-component {
+    // repo star and fork incons ********
+    .repo-fork-watcher {
+      display: flex;
+      justify-content: flex-end;
+    }
+    // badge component *********
+    .repo-badge {
+      margin-right: 5px;
+      background: #eff3f6;
+      padding: 5px;
+      font-weight: normal;
+      img {
+        width: 15px;
+        margin-right: 5px;
+      }
+     
+    }
+
+    .repo-info-branch-license-lang {
+      span {
+        margin-right: 10px;
+      }
+    }
+
+    .repo-description {
+      
+      margin-top: 10px;
+      p {
+        border-top: 1px#e9ecef solid;
+        border-left: 1px#e9ecef solid;
+        border-right: 1px#e9ecef solid;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: -2px;
+        border-radius: 2px;
+      }
+    }
+  }
+}
+
+

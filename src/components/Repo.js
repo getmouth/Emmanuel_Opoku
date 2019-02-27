@@ -13,8 +13,8 @@ const Repo = (props) => (
       </div>
       <div className="repo-info">
         <div className="repo-text">
-          <Link to={`${props.repo.name}`} onClick={() => props.fetchContent(props.repo.name)}>
-            <p onClick={() => props.fetchRepo(props.repo.name)}>{props.repo.name}</p>
+          <Link to={`/${props.repo.name}`}>
+            <p>{props.repo.name}</p>
           </Link>
           <span className="star"><img src={star} alt="" style={{ width: '12px' }} /></span>
           <span className="star_count"> {props.repo.stargazers_count}</span>&emsp;
@@ -31,8 +31,6 @@ const Repo = (props) => (
 
 Repo.propTypes = {
   repo: PropTypes.object.isRequired,
-  fetchRepo: PropTypes.func.isRequired,
-  fetchContent: PropTypes.func.isRequired,
 };
 
 export default Repo;

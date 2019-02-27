@@ -1,22 +1,48 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+/* eslint-disable consistent-return */
+/* eslint-disable no-undef */
+import React, { Component } from 'react';
 import Repo from './Repo';
 
-const RepoList = ({ repos, fetchRepo, fetchContent }) => (
-  <div>
-    <h1>Quandoo Repos</h1>
-    <div className="repo-row row">
-      {repos.map(repo => (
-        <Repo repo={repo} key={repo.id} fetchRepo={fetchRepo} fetchContent={fetchContent} />
-      ))}
-    </div>
-  </div>
-);
+class RepoList extends Component {
+  state = {
+    repos: [],
+  }
 
-RepoList.propTypes = {
-  repos: PropTypes.array.isRequired,
-  fetchRepo: PropTypes.func.isRequired,
-  fetchContent: PropTypes.func.isRequired,
-};
+  componentDidMount() {
+    fetch(`${API_URL}/orgs/quandoo/repos`)
+      .then(resp => resp.json())
+      .then(repos => this.setState({ repos }));
+  }
+
+  render() {
+    const { repos } = this.state;
+    const reposOwner = () => {
+      const gist = repos[0];
+      if (gist) {
+        return (
+          <div className="repo-owner-login">
+            <img
+              src={gist.owner.avatar_url}
+              alt="group of people happily dining"
+            />
+            <h1>{gist.owner.login}</h1>
+          </div>
+        );
+      }
+    };
+
+    return (
+      <div className="repo-list">
+        {reposOwner()}
+        <hr />
+        <div className="repo-row row">
+          {repos.map(repo => (
+            <Repo repo={repo} key={repo.id} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 
 export default RepoList;

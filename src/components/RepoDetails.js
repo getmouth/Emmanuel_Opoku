@@ -1,93 +1,89 @@
+/* eslint-disable no-undef */
 /* eslint-disable consistent-return */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import RepoBadges from './RepoBadges';
+import file from '../../img/file.png';
+import folder from '../../img/folder.png';
 
 class RepoDetails extends Component {
-  displayContent = () => (
-    this.props.contents.map(content => (
-      <tr key={content.sha}>
-        <td><a href={content.html_url}>{content.name}</a></td>
-      </tr>
-    ))
-  );
+  state = {
+    contents: [],
+    contributors: null,
+    repo: null,
+  }
+
+  componentDidMount() {
+    const { name } = this.props.match.params;
+
+    fetch(`${API_URL}/repos/quandoo/${name}/contents`)
+      .then(resp => resp.json())
+      .then(contents => this.setState({ contents }));
+
+    fetch(`${API_URL}/repos/quandoo/${name}`)
+      .then(resp => resp.json())
+      .then(repo => this.setState({ repo }));
+
+    fetch(`${API_URL}/repos/quandoo/${name}/contributors`)
+      .then(resp => resp.json())
+      .then(contributors => this.setState({ contributors }));
+  }
+
 
   render() {
-    const { newRepo } = this.props;
-    if (!newRepo) {
+    const { repo, contributors, contents } = this.state;
+    if (!repo) {
       return <p>wating</p>;
       // TODO : Replace with a loading gif.
     }
 
     const renderParrent = () => {
-      if (newRepo.parent) {
+      // if repo has parent object return it or default repo owner
+      if (repo.parent) {
         return (
-          <th>
-            <td>
+          <tr>
+            <th>
               <img
-                src={newRepo.parent.owner.avatar_url}
-                alt={newRepo.parent.full_name}
+                src={repo.parent.owner.avatar_url}
+                alt={repo.parent.full_name}
+                className="parent-img"
               />
-            </td>
-            <td>
-              <a href={newRepo.parent.owner.html_url}>
-                {newRepo.parent.full_name}
-              </a>
-            </td>
-          </th>
+              <span className="fork-info">Forked from : </span>
+              <a href={repo.parent.owner.html_url}>{repo.parent.full_name}</a>
+            </th>
+          </tr>
         );
       }
       return (
-        <a href={newRepo.owner.html_url}>
-          <img src={newRepo.owner.avatar_url} alt={newRepo.owner.full_name} />
-          {newRepo.owner.full_name}
-        </a>
+        <th>
+          <a href={repo.owner.html_url}>
+            <img src={repo.owner.avatar_url} alt={repo.owner.full_name} />
+            {repo.owner.full_name}
+          </a>
+        </th>
       );
     };
 
 
     return (
-      <div>
-        <span className="badge badge-secondary">
-          {newRepo.default_branch}
-        </span>&emsp;
-        <span className="badge badge-secondary">
-          {newRepo.language}
-        </span>
-        <div className="row">
-          <div className="col-md-3">
-            {newRepo.full_name}
-          </div>
-          <div className="col-md-3">
-            {newRepo.network_count}
-          </div>
-          <div className="col-md-3">
-            {newRepo.stargazers_count}
-          </div>
-          <div className="col-md-3">
-            {newRepo.subscribers_count}
-          </div>
-        </div>  {/* row end */}
-        <div className="row">
-          <div className="col-md-3">
-            {newRepo.license !== null ? newRepo.license.spdx_id : ''}
-          </div>
-          <div className="col-md-3">
-            Issues: {newRepo.open_issues_count}
-          </div>
-          <div className="col-md-3">
-            {newRepo.subscribers_count}
-          </div>
-        </div> {/* row end */}
-        <p>{newRepo.description}</p>
+      <div className="repo-details">
+        <RepoBadges repo={repo} contributors={contributors} />
         <table className="table table-bordered"> {/* loop through content object */}
           <thead className="thead-light">
-            <tr>
-              {renderParrent()}
-            </tr>
+            {renderParrent()}
           </thead>
           <tbody>
-            {this.displayContent()}
+            {contents.map(content => (
+              <tr key={content.sha}>
+                <td>
+                  <span className="content-image">
+                    <img src={content.type === 'file' ? file : folder} alt={content.name} />
+                  </span>
+                  <a href={content.html_url}>{content.name}</a>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -96,8 +92,7 @@ class RepoDetails extends Component {
 }
 
 RepoDetails.propTypes = {
-  newRepo: PropTypes.object,
-  contents: PropTypes.array.isRequired,
+  match: PropTypes.object,
 };
 
 export default RepoDetails;
