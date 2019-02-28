@@ -30,6 +30,7 @@ class RepoDetails extends Component {
     fetch(`${API_URL}/repos/quandoo/${name}/contributors`)
       .then(resp => resp.json())
       .then(contributors => this.setState({ contributors }));
+    // didn't implement: redux to manage state, requests and caching.
   }
 
 
