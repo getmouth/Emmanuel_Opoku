@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 require('dotenv').config();
 
 module.exports = {
@@ -14,8 +15,6 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: 'public',
-    port: 3000,
   },
   module: {
     rules: [
@@ -25,8 +24,8 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
-        test: /\.css$/,
-        loader: ['style-loader', 'css-loader'],
+        test: /\.scss$/,
+        loader: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(jpg|png|jpeg|gif)$/,
@@ -45,6 +44,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html',
       inject: 'body',
+    }),
+
+    new BrowserSyncPlugin({
+      host: 'localhost',
+      port: 3000,
+      proxy: 'http://localhost:8080',
     }),
   ],
 };

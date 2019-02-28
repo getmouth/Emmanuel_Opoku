@@ -13,7 +13,7 @@ const Repo = (props) => (
       </div>
       <div className="repo-info">
         <div className="repo-text">
-          <Link to={`/${props.repo.name}`}>
+          <Link to={`/${props.repo.name}`}> {/* Sets the routes to the parent RepoDetails component  */}
             <p>{props.repo.name}</p>
           </Link>
           <span className="star"><img src={star} alt="" style={{ width: '12px' }} /></span>

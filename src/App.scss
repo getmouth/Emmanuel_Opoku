@@ -1,9 +1,15 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   background: white;
   box-sizing: border-box;
+  margin-bottom: 140px;
 }
 
-//************** Repo component **************
+//************** Repo component **************//
 .repo {
   display: flex;
   justify-content: auto;
@@ -39,22 +45,54 @@ body {
     p {
       font-weight: bold;
       margin-bottom: 0;
+      font-size: 13px
     }
 
     span {
       font-size: 11px;
     }
   }
-  
+
+  /* Set mobile styling */
+  @media (max-width: 767px) {
+    width: 60%;
+    margin: auto;
+    margin-top: 80px;
+    display: block;
+    height: 270px;
+    box-shadow: 2px 2px 7px 3px rgba(54, 54, 54, 0.171);
+
+    .repo-img {
+      width: 100%;
+      height: 180px;
+      img {
+        width: 100%; 
+        height: 160px;
+        border-radius: 8px 8px 0 0;
+      }
+    }
+
+    .repo-info {
+      width: 100%;
+      top: 0px;
+      left: 30px;
+      
+    }
+  }
+
+  @media (max-width: 570px) {
+    width: 75%;
+  }
 }
 
+/* loading animation svg*/
 .repo-loading-svg {
   display: flex;
   justify-content: center;
   margin-top: 180px;
 
 }
-//************** RepoList component **************
+//************** RepoList component **************//
 
 .repo-list {
   margin-top: 30px;
@@ -65,23 +103,31 @@ body {
       display: inline-block;
       margin-left: 10px;
     }
-    img {
-      width: 120px;
+    .quandoo-link {
+      font-size: 10px;
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+      left: 40px;
+      bottom: 5px;
     }
   }
 }
 
 
-//************** Header component **************
+//************** Header component **************//
 
 .header {
   width: 100%;
-
-  .svg-container {
+  
+  .svg-container { /* quandoo logo styles*/
     margin-top: 30px;
     margin-left: 60px;
     width: 165px;
     height: 37px;
+    @media (max-width: 767px) {
+      margin-left: 10px;
+    }
   }
 
   .header-nav {
@@ -92,7 +138,7 @@ body {
   }
 }
 
-//************** Hero component **************
+//************** Hero component **************//
 
 .hero {
   .hero-img {
@@ -105,7 +151,8 @@ body {
   }
 }
 
-//************** RepoDetails component **************
+
+//************** RepoDetails component **************//
 .repo-details {
   margin-top: 30px;
   .parent-img {
@@ -129,14 +176,23 @@ body {
     font-size: 9px;
   }
 
+
   .details-badges-component {
-    // repo star and fork incons ********
-    .repo-fork-watcher {
+    .repo-fork-watcher { /*** Set the styles for repos star and fork icons ***/
       display: flex;
       justify-content: flex-end;
+      @media (max-width: 767px) {
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
     }
-    // badge component *********
-    .repo-badge {
+
+    .repo-full-name {
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
+    .repo-badge { /*** Set the styles for the Badges component ***/
       margin-right: 5px;
       background: #eff3f6;
       padding: 5px;
@@ -145,7 +201,10 @@ body {
         width: 15px;
         margin-right: 5px;
       }
-     
+
+      @media (max-width: 767px) {
+        margin-top: 15px;
+      }    
     }
 
     .repo-info-branch-license-lang {
@@ -154,8 +213,7 @@ body {
       }
     }
 
-    .repo-description {
-      
+    .repo-description { /* Set the styles for the description text*/
       margin-top: 10px;
       p {
         border-top: 1px#e9ecef solid;
@@ -170,4 +228,15 @@ body {
   }
 }
 
-
+/*** Footer component ***/
+.footer {
+  position: absolute;
+  margin-top: 60px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; 
+  line-height: 60px;
+  background-color: #1C1C1C;
+  color: #9b9b9b;
+}

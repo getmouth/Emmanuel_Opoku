@@ -10,7 +10,7 @@ import issue from '../../img/issue.png';
 const RepoBadges = (props) => (
   <div className="details-badges-component">
     <div className="row">
-      <div className="col-md-4">
+      <div className="col-md-4 repo-full-name">
         {props.repo.full_name}
       </div>
     </div>{/* row end */}

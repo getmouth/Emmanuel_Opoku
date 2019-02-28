@@ -18,14 +18,13 @@ class RepoList extends Component {
     const { repos } = this.state;
     const reposOwner = () => {
       const gist = repos[0];
-      if (gist) {
+      if (gist) { // Sets the Repo Owner heading on the front page
         return (
           <div className="repo-owner-login">
-            <img
-              src={gist.owner.avatar_url}
-              alt="group of people happily dining"
-            />
             <h1>{gist.owner.login}</h1>
+            <a href="http://www.quandoo.de" target="_blank" rel="noopener noreferrer" className="quandoo-link">
+              <p>http://www.quandoo.de</p>
+            </a>
           </div>
         );
       }

@@ -37,11 +37,10 @@ class RepoDetails extends Component {
     const { repo, contributors, contents } = this.state;
     if (!repo) {
       return <div className="repo-loading-svg">{loader()}</div>;
-      // TODO : Replace with a loading gif.
     }
 
     const renderParrent = () => {
-      // if repo has parent object return it or default repo owner
+      // if repo has parent object return it
       if (repo.parent) {
         return (
           <tr>
@@ -57,6 +56,7 @@ class RepoDetails extends Component {
           </tr>
         );
       }
+      // else it returns default repo owner
       return (
         <th>
           <img
@@ -74,8 +74,12 @@ class RepoDetails extends Component {
 
     return (
       <div className="repo-details">
-        <RepoBadges repo={repo} contributors={contributors} />
-        <table className="table table-bordered"> {/* loop through content object */}
+        <Link to="/" className="btn btn-light">&#60;&#60;Back</Link>
+        <RepoBadges
+          repo={repo}
+          contributors={contributors}
+        /> {/* renders repo stars, contributors...badges */}
+        <table className="table table-bordered"> {/* iterates and displays content object */}
           <thead className="thead-light">
             {renderParrent()}
           </thead>
